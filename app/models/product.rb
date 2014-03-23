@@ -1,10 +1,10 @@
 class Product < ActiveRecord::Base
-	validates :title, :discription, :image_url, :price, presence: true
+	validates :title, :description, :image_url, :price, presence: true
 	validates :price, numericality: {greater_than_or_equal_to: 0.01}
 	validates	:title, uniqueness:true
 	IMAGE_FORMAT = %r{\.(gif|jpg|png)\z}i
 	validates :image_url, allow_blank: true, format: {with: IMAGE_FORMAT}
-	 # message: "URL должен указывать на изображение формата GIF, JPG, PNG."}
+	 # message: {"URL должен указывать на изображение формата GIF, JPG, PNG."}
 
 	has_many :line_items
 	has_many :orders, through: :line_items

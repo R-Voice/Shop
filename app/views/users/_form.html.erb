@@ -1,38 +1,26 @@
-<%= form_for(@user) do |f| %>
-  <% if @user.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
-
-      <ul>
-      <% @user.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
+<div class="row">
+  <div class="col-lg-4 col-lg-offset-4 col-sm-6 col-sm-offset-3">
+    <%= form_for(@user) do |f| %>
+      <%= render 'shared/error_messages', object: f.object %>
+      <div class="form-group">
+      <%= f.label :name, 'Имя пользователя' %>
+      <%= f.text_field :name, size:40, class: 'form-control' %>
+      </div>   
+      <% if params[:action] == 'edit' || params[:action] == 'update' %>
+        <div class="form-group">
+          <%= f.label :current_password, 'Старый пароль' %>
+          <%= f.password_field :current_password, class: 'form-control' %>
+        </div>
       <% end %>
-      </ul>
-    </div>
-  <% end %>
-  
-
-    <div>
-      <%= f.label :name %><br>
-      <%= f.text_field :name, size:40 %>
-    </div>
-    
-    <% if params[:action] == 'edit' || params[:action] == 'update' %>
-      <%= f.label :current_password, 'Старый пароль' %>
-      <%= f.password_field :current_password %>
-    <% end %>
-    
-    <div>
+      <div class="form-group">  
       <%= f.label :password, 'Пароль:' %>
-      <%= f.password_field :password %>
-    </div>
-    <div>
+      <%= f.password_field :password, class: 'form-control' %>
+      </div>
+      <div class="form-group">  
       <%= f.label :password_confirmation, 'Подтверждение:' %>
-      <%= f.password_field :password_confirmation %>
-    </div>
-    <div>
-      <%= f.submit %>
-    </div>
- 
-  
-<% end %>
+      <%= f.password_field :password_confirmation, class: 'form-control' %>
+      </div>    
+      <%= f.submit 'Create user' , class: 'btn btn-primary' %>
+    <% end %>
+  </div>
+</div>
