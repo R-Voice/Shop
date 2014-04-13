@@ -1,6 +1,5 @@
 class LineItemsController < ApplicationController
   before_action :set_line_item, only: [:show, :edit, :update, :destroy]
-  skip_before_filter :authorize, only: :create
 
   # GET /line_items
   # GET /line_items.json
@@ -61,9 +60,47 @@ class LineItemsController < ApplicationController
     @line_item.destroy
     respond_to do |format|
       format.html { redirect_to line_items_url }
+      format.js
       format.json { head :no_content }
     end
   end
+
+  # PUT /line_items/1
+  # PUT /line_items/1.json
+  def decrease
+    @cart = current_cart
+    @line_item = @cart.decrease(params[:id])
+
+    respond_to do |format|
+      if @line_item.save
+        format.html { redirect_to cart_path(@cart.id), success: 'Line item was successfully updated.' }
+        format.js   {@current_item = @line_item}
+        format.json { head :success }
+      else
+        format.html { render cart_path(@cart_id), flash.now[:danger] = "Quantity didn't change" }
+        format.json { render json: @line_item.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # PUT /line_items/1
+  # PUT /line_items/1.json
+  def increase
+    @cart = current_cart
+    @line_item = @cart.increase(params[:id])
+
+    respond_to do |format|
+      if @line_item.save
+        format.html { redirect_to cart_path(@cart.id), success: 'Line item was successfully updated.' }
+        format.js
+        format.json { head :success }
+      else
+        format.html { render cart_path(@cart_id), flash.now[:danger] = "Quantity didn't change"}
+        format.json { render json: @line_item.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.

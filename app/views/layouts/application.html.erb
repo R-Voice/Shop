@@ -12,10 +12,32 @@
 	<%= render 'layouts/navigation' %>
 
 	<div class="container main-container">
+				    
+	    <%= yield(:carousel) %>
+			
 			<% flash.each do |key, value| %>
 	   		<%= content_tag(:div, value, class: "alert alert-#{key}") %>
 	    <% end %>
-			<%= yield %>
+	    
+	    <% if notice %>
+	    	<div class="alert alert-info"><%= notice %></div>
+			<% end %>
+			
+			<% if alert %>
+				<div class="alert alert-info"><%= alert %></div>		
+			<% end %>
+	    
+	    <div class="main-container">
+				<div class="row">
+
+					<%= render 'store/left_aside' %>
+					
+					<div class="col-lg-9 col-md-9 col-sm-12">
+						<%= yield %>
+					</div>
+				</div>
+			</div>
+			
 	</div>
 	<%= render 'layouts/footer' %>
 	<div><%= debug(params)if Rails.env.development? %></div>

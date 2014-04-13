@@ -1,17 +1,54 @@
-<%= form_for(@cart) do |f| %>
-  <% if @cart.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@cart.errors.count, "error") %> prohibited this cart from being saved:</h2>
-
-      <ul>
-      <% @cart.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
+<div class="table-responsive">
+  <table class="table table-bordered tbl-cart">
+    <thead>
+      <tr>
+        <td class="hidden-xs"> Image </td>
+        <td> Product name </td>
+        <td> Quantity </td>
+        <td> Unit price </td>
+        <td> Sub total </td>
+        <td> Remove </td>
+      </tr>
+    </thead>
+    <tbody>
+      <% @cart.line_items.each do |line_item| %>
+        <tr>
+          <td class="td-image hidden-xs"> <%= image_tag(line_item.product.image_url) %> </td>
+          <td> 
+            <%= link_to product_path(line_item.product.id) do %> 
+              <%= line_item.product.title %> 
+            <% end %>
+          </td>
+          <td class="td-quantity">
+            <div class="input-group">
+              <span class="input-group-btn"> 
+                <%= button_to '-', decrease_line_item_path(line_item), method: :put, class: 'btn btn-default', remote: true %> 
+              </span>
+              <input type="text" value="<%= line_item.quantity %>" class="form-control text-center input-qty">
+              <span class="input-group-btn">
+                <%= button_to '+', increase_line_item_path(line_item), method: :put, class: 'btn btn-default', remote: true %> 
+              </span>
+            </div>
+          </td>
+          <td> <%= line_item.product.price %> </td>
+          <td> <%= line_item.total_price %> </td>
+          <td class="text-center">
+            <%= link_to line_item, method: :delete, data: {confirm: 'Are you sure?'}, remote: true do %> 
+              <b class="glyphicon glyphicon-trash"></b>
+            <% end %>
+          </td>
+        </tr> 
       <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="actions">
-    <%= f.submit %>
+    </tbody>
+  </table>
+  <div class="btn-group form-btn-mix">
+    <%= link_to store_path, class: 'btn btn-primary' do %>
+      <b class="glyphicon glyphicon-circle-arrow-left"></b>
+      Continue Shopping
+    <% end %>
+    <%= link_to new_order_path, class: 'btn btn-primary' do %>
+      Checkout
+      <b class="glyphicon glyphicon-circle-arrow-right"></b>
+    <% end %>
   </div>
-<% end %>
+</div>

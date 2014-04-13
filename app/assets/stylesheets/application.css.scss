@@ -46,7 +46,11 @@
 	}
 /* End mixins */
 
- *{
+$bg_blue: #428bca;
+$text_blue: #4c7ed3;
+$light_grey: #f1f1f1;
+
+*{
 	@include border-radius(0!important);
 	outline: 0;
 }
@@ -61,7 +65,7 @@ select{border:1px solid #ddd;padding:3px}
 body{
 	font-family: 'source_sans_proregular';
 	color:#333;
-	background: #f1f1f1
+	background: $light_grey
 }
 .main-container{
 	padding-top: 20px;
@@ -72,7 +76,7 @@ body{
 
 header{
 	padding-top: 10px;
-	background: #f1f1f1;
+	background: $light_grey;
 
 	.well{
 		@include box-shadow(none);
@@ -80,6 +84,7 @@ header{
 		padding-top: 20px;
 		border: 0;
 		background: transparent;
+		margin-bottom: 5px;
 	}
 	
 	.logo{
@@ -92,7 +97,7 @@ header{
 			text-decoration: none;
 			
 			span{
-				color: #428bca;
+				color: $bg_blue;
 			}
 		}
 	}
@@ -126,11 +131,12 @@ header{
 
 	ul.cart-content{
 			min-width: 250px;
+			width:100%;
 			b{
 				font-weight: normal;
 				display: block;
 				font-family: sans-serif;
-				color: #428BCA;
+				color: $bg_blue;
 			}
 	}
 }
@@ -157,7 +163,7 @@ header{
 	@include transition(all 100ms ease-in-out 0s);
 }
 .navbar li a:hover, .navbar li.active a{
-	background-color: #428bca!important;
+	background-color: $bg_blue !important;
 }
 
 .navbar li.nav-dropdown .caret{
@@ -172,21 +178,13 @@ header{
 		text-transform: inherit;
 	}
 	.navbar li.nav-dropdown ul li a:hover{
-		background-color: #f1f1f1!important;
+		background-color: $light_grey!important;
 	}
 }
 
 /* End NAVBAR */
 
-.link-p{
-	display: block;
-	min-height: 250px;
-	height: auto;
-	width: 100%;
-	max-width: 100%;
-	margin-right: auto;
-	margin-left: auto;
-}
+
 .first-p{
 	min-height: 169px;
 }
@@ -247,7 +245,7 @@ span.title{
 	padding-bottom: 8px;
 	margin-bottom: 20px;
 	font-family: 'open_sanscondensed_light';
-	color: #4c7ed3;
+	color: $text_blue;
 	text-transform: uppercase;
 }
 
@@ -259,7 +257,7 @@ span.title{
 	
 		&:hover{
 			background: #fff;
-			color: #428bca;
+			color: $bg_blue;
 		}
 	}
 }
@@ -267,9 +265,25 @@ span.title{
 .thumbnail{
 	text-align:center;
 	&:hover{
-		@include box-shadow(0 0 10px 1px #f1f1f1);
+		@include box-shadow(0 0 10px 1px $light_grey);
+	}
+	a > img {
+		height:250px;
+		width:230px;
 	}
 }
+
+.link-p{
+	display: block;
+	min-height: 250px;
+	height: auto;
+	width: 100%;
+	max-width: 100%;
+	margin-right: auto;
+	margin-left: auto;
+	overflow: hidden;
+}
+
 .catalogue-pagination{
 	margin: 0;
 	margin-bottom: 40px;
@@ -301,20 +315,27 @@ span.title{
 	color: #fff;
 }
 
+
 .tbl-cart{
  	thead{
 		background: #f8f8f8
 	}
 	
-	.td-qty{
+	.td-quantity{
 		white-space: normal !important;
-		width: 130px;
+		width: 134px;
+	}
+	
+	td.td-image{
+		width:96px;
+	}
+
+	img{
+		width:80px;
+		height: 80px;
 	}
 }
 
-.btns-cart .btn{
-	margin-right: 3px;
-}
 .tbl-checkout tbody tr td:nth-child(odd){
 	background: #f8f8f8;
 }
@@ -323,15 +344,43 @@ span.title{
 	margin-right: 5px;
 	width: 130px;
 }
-
+		
 /* Form */
 .title-form{
-	color: #4c7ed3;
+	color: $text_blue;
 	text-align: center;
 	margin-top: 15px;
 	margin-bottom: 30px;
 }
+
 form{
 	margin-bottom: 4em;
 }
+
+.btn-group{
+	&>form{
+	display:inline;
+	margin-bottom: 5px;
+		div{
+			display: inline;
+			
+			button{
+			margin-right: 5px;
+			}
+		}
+
+	}
+}
+
+.form-btn-mix{
+	&>input{
+		float: left;
+		margin-right: 5px;
+	}
+
+	&>a{
+		margin-right: 5px;
+	}
+}
+
 /* End Form */

@@ -78,8 +78,11 @@ class ProductsController < ApplicationController
 
     def who_bought
       @product = Product.find(params[:id])
-      respond_to do |format|
-        format.atom
-      end
+      @latest_order = @product.orders.order(:updated_at).last_order
+      if stale?(@latest_order)
+        respond_to do |format|
+          format.atom
+        end
+      end  
     end
 end

@@ -3,18 +3,12 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   # before_filter :authorize
   protect_from_forgery with: :exception
-  before_filter :current_cart
+  before_action  :current_cart
 
   protected
 
-  def authorize
-    if User.count.zero?
-      redirect_to new_user_path, notice: "Please create the first user account" 
-    else
-      unless User.find_by_id(session[:user_id])
-        redirect_to login_url, notice: 'Пожалуйста, пройдите авторизацию'
-      end
-    end
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.for(:sign_up) << :name
   end
 
   def current_cart

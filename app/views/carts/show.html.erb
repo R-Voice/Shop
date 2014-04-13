@@ -1,6 +1,11 @@
-<% if notice %>
-	<p class='notice'>
-		<%= notice %>
-	</p>
-	<%= render(@cart) %>
-<% end %>
+<% provide(:title, 'Your Cart') %>
+<div class="col-lg-12 col-md-12 col-sm-12">
+	<span class="title">Shopping Cart</span>
+	<% unless @cart.line_items.empty? %>
+		<div id="show_cart">
+			<%= render 'form' %>
+		</div>
+	<% else %>
+		<div class="alert alert-info">Your cart is empty!</div>
+	<% end %>
+</div>

@@ -1,0 +1,33 @@
+<% provide(:title, "Sign up") %>
+<span class="title">Sign up</span>
+<div class="col-lg-5 col-lg-offset-3 col-md-5 col-md-offset-3 col-sm-8 col-sm-offset-2">
+	<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+	  <%= devise_error_messages! %>
+		<div class="form-group">
+		  <%= f.label :user_name %>
+		  <%= f.email_field :user_name, :autofocus => true, class: "form-control" %>
+	  </div>
+
+	  <div class="form-group">
+		  <%= f.label :email %>
+		  <%= f.email_field :email, class: "form-control" %>
+	  </div>
+
+	  <div class="form-group">
+		  <%= f.label :password %>
+		  <%= f.password_field :password, class: "form-control" %>
+	  </div>
+
+	  <div class="form-group">
+		  <%= f.label :password_confirmation %>
+		  <%= f.password_field :password_confirmation, class: "form-control" %>
+	  </div>
+
+	  <div class="btn-group form-btn-mix">
+	  	<%= f.submit "Sign up", class: "btn btn-primary" %>
+	  	<%= render "users/shared/links" %>
+	  </div>
+	<% end %>
+</div>
+
+

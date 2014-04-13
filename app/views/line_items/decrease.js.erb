@@ -1,0 +1,5 @@
+$('#show_cart').html("<%= escape_javascript(render 'carts/form') %>");
+
+$('#cart-name').html("Cart: <%= escape_javascript(pluralize(@cart.line_items.count, 'item')) %>");
+
+$('#cart-content').html("<%= escape_javascript( render @cart ) %>");

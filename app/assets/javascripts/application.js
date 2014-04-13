@@ -17,12 +17,4 @@
 //= require turbolinks
 //= require_tree .
 
-$(document).ready(function(){
-  $('.bxslider').bxSlider({
-  	mode: 'fade',
-  	captions: true,
-  	auto: true,
-  	infiniteLoop: true,
-  	hideControlOnEnd: true}
-  );
-});
+	

@@ -15,11 +15,11 @@
 					<form action="" class="form-inline" role="form">
 						<div class="input-group">
 							<input type="text" class="form-control input-search" placeholder="Enter something to search">
-								<span class="input-group-btn">
-									<button class="btn btn-default no-border-left" type="submit">
-										<span class="glyphicon glyphicon-search"></span>
-									</button>
-								</span>
+							<span class="input-group-btn">
+								<button class="btn btn-default no-border-left" type="submit">
+									<span class="glyphicon glyphicon-search"></span>
+								</button>
+							</span>
 						</div>
 					</form>
 				</div>
@@ -32,17 +32,27 @@
 							<span class="pull-left">
 								<span class="glyphicon glyphicon-shopping-cart"></span>
 							</span>
-							<span class="pull-left cart-name">
+							<span class="pull-left cart-name" id="cart-name">
 									Cart: <%= pluralize(@cart.line_items.count, 'item') %> 
 							</span>
 							<span class="pull-right">
 								<b class="caret"></b>
 							</span>
 						</button>
-						<ul class="dropdown-menu cart-content" role="menu">
-							<%= render @cart %>
+						<ul class="dropdown-menu cart-content" id="cart-content" role="menu">
+							<%= render partial: "carts/cart", object: @cart %>
 						</ul>
 					</div>
+				</div>
+				<div class="pull-right">
+					<% if user_signed_in? %>
+						<span>Hello, <%= current_user.email %></span> <br>
+						<span><%= link_to 'Sign out', destroy_user_session_path, :method => :delete %></span>
+					<% else %>
+						<span><%= link_to 'Sign in', new_user_session_path %></span>
+			    		or
+			    	<span><%= link_to 'Sign up', new_user_registration_path %></span>
+					<% end %>
 				</div>
 			</div>
 		</div>

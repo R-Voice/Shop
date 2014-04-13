@@ -1,9 +1,9 @@
-<%= render(cart.line_items) %>
-		
-<li class="divider"></li>
-		
+<% unless cart.line_items.count == 0 %>
+	<%= render partial:"line_items/line_item", collection: cart.line_items %>
+	<li class="divider"></li>
+<% end %>		
 <li>
-	<%= link_to (new_order_path) do %>
+	<%= link_to (cart_path(cart)) do %>
 		Total: <%= number_to_currency(cart.total_price) %>
 	<% end %>
 </li>

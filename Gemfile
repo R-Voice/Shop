@@ -37,6 +37,8 @@ gem 'will_paginate', '~> 3.0'
 gem 'bcrypt-ruby'
 gem 'bootstrap-sass', '~> 3.1.1'
 gem 'bootstrap-will_paginate'
+gem 'devise'
+gem 'omniauth'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
